@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Ez.Borrow.Models.Goods>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+    <a asp-controller="Borrow" asp-action="Index">รายการยืม</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ImageUrl)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreateBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastEditDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EditBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeleteDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DeleteBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastMoveDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoveBy)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <img src="@item.ImageUrl" width="200" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Position)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastEditDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EditBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeleteDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeleteBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastMoveDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MoveBy)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

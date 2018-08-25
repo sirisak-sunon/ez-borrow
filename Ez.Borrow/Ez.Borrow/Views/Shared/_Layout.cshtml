@@ -30,14 +30,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    @if (!string.IsNullOrEmpty(ViewBag.username))
+                    {
+                        <li><a asp-area="" asp-controller="Poll" asp-action="Logout">Logout [@ViewBag.username]</a></li>
+                    }
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container body-content">
+        @if (TempData.Any(x => x.Key == "message"))
+        {
+            <div class="alert alert-warning fade in alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                @Html.Raw(TempData.First(x => x.Key == "message").Value)
+            </div>
+        }
         @RenderBody()
         <hr />
         <footer>

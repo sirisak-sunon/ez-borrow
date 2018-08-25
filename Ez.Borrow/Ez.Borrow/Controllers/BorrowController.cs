@@ -6,34 +6,35 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Ez.Borrow.Models;
 using Microsoft.Extensions.Caching.Distributed;
+using Ez.Borrow.Repositories;
 
 namespace Ez.Borrow.Controllers
 {
     [ApiExplorerSettings(IgnoreApi = true)]
-    public class HomeController : Controller
+    public class BorrowController : Controller
     {
         private readonly IDistributedCache cache;
+        private readonly IDataRepository<Goods> goodsDac;
 
-        public HomeController(IDistributedCache cache)
+        public BorrowController(IDistributedCache cache, IDataRepository<Goods> goodsDac)
         {
             this.cache = cache;
+            this.goodsDac = goodsDac;
         }
 
         public IActionResult Index()
         {
             var username = cache.GetString(Utility.username_key);
-            if (!string.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(username))
             {
-                return RedirectToAction("Index", "Borrow");
+                TempData["message"] = "Please login.";
+                return RedirectToAction("Index", "Home");
             }
 
-            return View();
-        }
+            var goodsList = goodsDac.List(g => true);
 
-        public IActionResult Login(string username)
-        {
-            cache.SetString(Utility.username_key, username);
-            return RedirectToAction("Index", "Borrow");
+            ViewBag.username = username;
+            return View(goodsList);
         }
 
         public IActionResult Error()

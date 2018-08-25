@@ -35,6 +35,7 @@ namespace Ez.Borrow
             services.AddTransient(x => Configuration.GetSection("MongoDBConfiguration").Get<MongoDBConfiguration>());
 
             services.AddTransient<IDataRepository<Goods>, GoodsRepository<Goods>>();
+            services.AddTransient<IDataRepository<BorrowLog>, BorrowLogRepository<BorrowLog>>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
