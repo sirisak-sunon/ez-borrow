@@ -10,7 +10,8 @@ using Ez.Borrow.Repositories;
 
 namespace Ez.Borrow.Controllers
 {
-    [ApiExplorerSettings(IgnoreApi = true)]
+    [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
+    //[ApiExplorerSettings(IgnoreApi = true)]
     public class GoodsController : Controller
     {
         private readonly IDistributedCache cache;
@@ -20,6 +21,13 @@ namespace Ez.Borrow.Controllers
         {
             this.cache = cache;
             this.goodsDac = goodsDac;
+        }
+
+        [HttpGet("api/[controller]/[action]/{id}")]
+        public Goods Get(string id)
+        {
+            var goods = goodsDac.Get(g => g.Id == id);
+            return goods;
         }
 
         public IActionResult Index()

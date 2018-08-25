@@ -24,7 +24,7 @@ namespace Ez.Borrow.Controllers
             var username = cache.GetString(Utility.username_key);
             if (!string.IsNullOrEmpty(username))
             {
-                return RedirectToAction("Index", "Borrow");
+                return RedirectToAction("Index", "Goods");
             }
 
             return View();
@@ -33,7 +33,13 @@ namespace Ez.Borrow.Controllers
         public IActionResult Login(string username)
         {
             cache.SetString(Utility.username_key, username);
-            return RedirectToAction("Index", "Borrow");
+            return RedirectToAction("Index", "Goods");
+        }
+
+        public IActionResult Logout()
+        {
+            cache.Remove(Utility.username_key);
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Error()

@@ -11,7 +11,7 @@ namespace Ez.Borrow.Models
         public DateTime CreateDate { get; set; }
         public string Borrower { get; set; }
         public string Witness { get; set; }
-        public DateTime WitnessConfirmDate { get; set; }
+        public DateTime? WitnessConfirmDate { get; set; }
         public string ReturnWitness { get; set; }
         public DateTime? ReturnDate { get; set; }
         public IEnumerable<Goods> BorrowGoods { get; set; }
